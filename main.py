@@ -49,9 +49,7 @@ def init():
         os.makedirs(voc_decks_path)
         voc_decks_path_bool = True
     else:
-        print()
-
-    return voc_decks_path
+        print() # ich war hier lol
 
 commands = {
     "1" : voc_training,
