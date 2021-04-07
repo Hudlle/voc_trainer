@@ -2,9 +2,11 @@ import random
 import json
 import sys
 import os
+import matplotlib
 
 def voc_learn():
-    cwd = os.getcwd()
+    voc_decks_path = init()
+    print(voc_decks_path)
 def create_deck():
     pass
 def edit_deck():
@@ -24,7 +26,7 @@ def voc_training():
     keys = list(voc_training_commands.keys())
     for i in keys:
         if i  == answer:
-            commands[answer]()
+            voc_training_commands[answer]()
             voc_training()
             return
     print(f"E: {answer} Is Not A Valid Input. Try Again.")
@@ -42,8 +44,14 @@ def init():
     cwd = os.getcwd()
     
     voc_decks_path = cwd + "/voc_decks"
+    voc_decks_path_bool = False
     if os.path.exists(voc_decks_path) == False:
         os.makedirs(voc_decks_path)
+        voc_decks_path_bool = True
+    else:
+        print()
+
+    return voc_decks_path
 
 commands = {
     "1" : voc_training,
