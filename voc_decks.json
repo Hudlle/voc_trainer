@@ -1,0 +1,16 @@
+[
+    {
+        "name": "deck 1",
+        "vocab": {
+            "hello": "hola",
+            "hei\u00dfen": "llamarse"
+        }
+    },
+    {
+        "name": "lol test",
+        "vocab": {
+            "hello": "hola",
+            "hei\u00dfen": "llamarse"
+        }
+    }
+]

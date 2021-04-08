@@ -12,9 +12,9 @@ class VocTraining:
         cwd = os.getcwd()
         voc_decks_path = cwd + "\\voc_decks"
 
-        print("[SYSTEM] Checking paths ...")
+        print("[SYSTEM] Checking base path ...")
         if os.path.exists(voc_decks_path) == False:
-            print(f"[ERROR] Failed to initalize vocab decks.\nPath '{voc_decks_path}' does not exist. Would you like to create it? [y/n]")
+            print(f"[ERROR] Failed to initalize vocab decks path.\n'{voc_decks_path}' does not exist. Would you like to create it? [y/n]")
             answer = input("[SYSTEM] > ")
             if answer == "y":
                 os.mkdir(voc_decks_path)
@@ -51,9 +51,29 @@ class VocTraining:
             return
 
     def learn_vocab(self):
-        
-    def create_deck(self):
         pass
+
+    def create_deck(self):
+        deck_name = "deck 1"
+        voc_originals = ["hello", "heißen"]
+        voc_translations = ["hola", "llamarse"]
+        voc_dict = dict(zip(voc_originals, voc_translations))
+
+        deck1 = {"name" : deck_name, "vocab" : voc_dict}
+        deck2 = {"name" : "lol test", "vocab" : voc_dict}
+
+        decks = []
+
+        with open("voc_decks.json", "w") as f:
+            json.dump(decks, f, indent=4)
+
+        with open("voc_decks.json", "r") as f:
+            data = json.load(f)
+            for i in data:
+                print(i["name"])
+                print(i["vocab"])
+
+
     def edit_deck(self):
         pass
 
