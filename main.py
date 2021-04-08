@@ -5,8 +5,8 @@ import os
 
 class VocTraining:
     def __init__(self):
-        self.exist_voc_path = self.check_paths()
-        self.training_cmds = {"alökds" : "aölskdf"}
+        self.exist_voc_path = False
+        self.training_cmds = {"1" : self.learn_vocab, "2" : self.create_deck, "3" : self.edit_deck}
 
     def check_paths(self):
         cwd = os.getcwd()
@@ -25,19 +25,24 @@ class VocTraining:
                 print(f"[ERROR] Creation of directory at '{voc_decks_path}' aborted. Returning to main menu.")
                 self.exist_voc_path = False
                 menu()
+                return
+        
+        self.exist_voc_path = True
         print("[SYSTEM] Completed.")
+        self.start_training()
 
     def start_training(self):
         if self.exist_voc_path == True:
-            print("\n# Vocab Training\n[1] Learn Vocab\n[2] Create New Deck\n[3] Edit A Deck\n[B] Back")
+            print("\n# Vocab Training\n[1] Learn vocab\n[2] Create new deck\n[3] Edit a deck\n[B] Back")
             answer = input("> ")
             if answer == "b" or answer == "B":
                 menu()
                 return
-            keys = list(training_cmds.keys())
+            keys = list(self.training_cmds.keys())
             for i in keys:
                 if i == answer:
-                    training_cmds[answer]()
+                    self.training_cmds[answer]()
+                    self.start_training()
                     return
             print(f"[ERROR] '{answer}' is not a valid input. Try again.")
             self.start_training()
@@ -45,16 +50,20 @@ class VocTraining:
             self.check_paths()
             return
 
-def quitApp():
-    print("Bye.")
-    sys.exit()
+    def learn_vocab(self):
+        
+    def create_deck(self):
+        pass
+    def edit_deck(self):
+        pass
 
 def menu():
-    print("\n--> Main Menu\n[1] Voc. Training\n[2] Tens Training\n[Q] Quit\n")
+    print("\n--> Main Menu\n[1] Vocab training\n[2] Tens training\n[Q] Quit\n")
     answer = input("> ")
 
     if answer == "q" or answer == "Q":
-        quitApp()
+        print("Bye.")
+        sys.exit()
     elif answer == "1":
         voc_training = VocTraining().start_training()
         return
