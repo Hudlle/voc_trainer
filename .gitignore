@@ -141,3 +141,4 @@ cython_debug/
 json_refresh.py
 test.json
 /voc_decks
+/.vscode
