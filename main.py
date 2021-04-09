@@ -38,7 +38,7 @@ class VocTraining:
                     print(f"[SUCCESS] Successfully created vocab decks storage at: '{self.vocab_path}'")
                     self.exist_vocab_path = True
                 else:
-                    print(f"[ERROR] Creation of needed storage capacity at '{self.vocab_path}' aborted. Returning to main menu.")
+                    print(f"[ERROR] Creation of needed storage capacity at '{self.data_path}' aborted. Returning to main menu.")
                     menu()
                     return
             else:
@@ -70,14 +70,31 @@ class VocTraining:
         pass
 
     def create_deck(self):
-        deck_name = input("#Create new deck\nWhich name should the deck have?\n> ") # have to check if there are already decks with the same name and if so return back the error
+        with open(self.vocab_path, "r") as f:
+            data = json.load(f)
+            decks = data["decks"]
+            
+            deck_names = []
+            for i in decks:
+                deck_names.append(list(i)[0])
         
-        #with open("voc_decks.json")
+        deck_name = input("#Create new deck\nWhich name should the deck have?\n> ") 
+        for i in deck_names:
+            if deck_name == deck_names:
+                print(f"[ERROR] '{deck_name}' is already in use. Try again.")
+                self.create_deck()
+                return
+        print(f"Deck name will be: {deck_name}\n")
 
-        voc_originals = []
-        voc_translations = []
+        print("Now add vocab.")
+        vocab_originals, vocab_translations = [], []
         while True:
-            original = input("")
+            print(f"Card #{len(vocab_originals) + 1}")
+            output = self.create_voc()
+            vocab_originals.append(output[0]), vocab_translations.append(output[1])
+            answer = input("Do you want to create another card? [y/n]\n> ")
+            if answer == "n":
+                break
 
 
 
@@ -109,7 +126,17 @@ class VocTraining:
             decks[0][list(decks[0])[0]] = "kek w wenn das geht ist das einfach nur genial"
             print(decks[0][list(decks[0])[0]])
 
-
+    def create_voc(self):
+        original = input("Original    > ")
+        translation = input("Translation > ")
+        
+        answer = input("Do you want to make any changes? [y/n]\n> ")
+        if answer == "y":
+            self.create_voc()
+            return
+        
+        return [original, translation]
+    
     def edit_deck(self):
         pass
 
