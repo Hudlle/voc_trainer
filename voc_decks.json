@@ -1,16 +1,20 @@
-[
-    {
-        "name": "deck 1",
-        "vocab": {
-            "hello": "hola",
-            "hei\u00dfen": "llamarse"
+{
+    "decks": [
+        {
+            "deck 1": {
+                "vocab": {
+                    "hello": "hola",
+                    "hei\u00dfen": "llamarse"
+                }
+            }
+        },
+        {
+            "deck 2": {
+                "vocab": {
+                    "hello": "hola",
+                    "hei\u00dfen": "llamarse"
+                }
+            }
         }
-    },
-    {
-        "name": "lol test",
-        "vocab": {
-            "hello": "hola",
-            "hei\u00dfen": "llamarse"
-        }
-    }
-]
+    ]
+}

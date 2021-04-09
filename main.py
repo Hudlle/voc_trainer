@@ -59,20 +59,27 @@ class VocTraining:
         voc_translations = ["hola", "llamarse"]
         voc_dict = dict(zip(voc_originals, voc_translations))
 
-        deck1 = {"name" : deck_name, "vocab" : voc_dict}
-        deck2 = {"name" : "lol test", "vocab" : voc_dict}
+        deck1 = {deck_name : { "vocab" : voc_dict}}
+        deck2 = {"deck 2" : {"vocab" : voc_dict}}
 
-        decks = []
+        decks = [deck1, deck2]
+
+        data = {"decks" : decks}
 
         with open("voc_decks.json", "w") as f:
-            json.dump(decks, f, indent=4)
+            json.dump(data, f, indent=4)
 
         with open("voc_decks.json", "r") as f:
             data = json.load(f)
-            for i in data:
-                print(i["name"])
-                print(i["vocab"])
+            decks = data["decks"]
+            print(decks[0]["deck 2"])
+            
+            decks_names = []
+            for i in decks:
+                decks_names.append(i.keys())
 
+            for i in decks_names:
+                print(decks[i])
 
     def edit_deck(self):
         pass
