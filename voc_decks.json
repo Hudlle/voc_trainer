@@ -1,20 +1,3 @@
 {
-    "decks": [
-        {
-            "kalsdjflkas": {
-                "vocab": {
-                    "hello": "hola",
-                    "hei\u00dfen": "llamarse"
-                }
-            }
-        },
-        {
-            "deck 2": {
-                "vocab": {
-                    "hello": "hola",
-                    "hei\u00dfen": "llamarse"
-                }
-            }
-        }
-    ]
+    "decks": null
 }

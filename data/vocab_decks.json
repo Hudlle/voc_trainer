@@ -15,6 +15,20 @@
                     "hei\u00dfen": "llamarse"
                 }
             }
+        },
+        {
+            "test": {
+                "vocab": {
+                    "n": "n"
+                }
+            }
+        },
+        {
+            "test": {
+                "vocab": {
+                    "n": "n"
+                }
+            }
         }
     ]
 }

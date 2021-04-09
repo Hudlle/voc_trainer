@@ -87,54 +87,47 @@ class VocTraining:
         print(f"Deck name will be: {deck_name}\n")
 
         print("Now add vocab.")
-        vocab_originals, vocab_translations = [], []
+        vocab_originals, vocab_translations, vocab_dict = [], [], []
         while True:
             print(f"Card #{len(vocab_originals) + 1}")
             output = self.create_voc()
             vocab_originals.append(output[0]), vocab_translations.append(output[1])
             answer = input("Do you want to create another card? [y/n]\n> ")
             if answer == "n":
+                vocab_dict = dict(zip(vocab_originals, vocab_translations))
                 break
-
-
-
-
-
-
-
-        voc_originals = ["hello", "heißen"]
-        voc_translations = ["hola", "llamarse"]
-        voc_dict = dict(zip(voc_originals, voc_translations))
-
-        deck1 = {deck_name : { "vocab" : voc_dict}}
-        deck2 = {"deck 2" : {"vocab" : voc_dict}}
-
-        decks = [deck1, deck2]
-
-        data = {"decks" : decks}
-
-        with open("voc_decks.json", "w") as f:
+        
+        with open(self.vocab_path, "w") as f:
+            new_deck = {deck_name: {"vocab" : vocab_dict}}
+            for i in decks:
+                print(i)
+            decks.append(new_deck)
+            for i in decks:
+                print(i)
+            data = {"decks" : decks}
             json.dump(data, f, indent=4)
 
-        with open("voc_decks.json", "r") as f:
-            data = json.load(f)
-            decks = data["decks"]
-            for i in decks:
-                deck_name = list(i)[0]
-                print(i[deck_name]["vocab"])
 
-            decks[0][list(decks[0])[0]] = "kek w wenn das geht ist das einfach nur genial"
-            print(decks[0][list(decks[0])[0]])
-
+        #with open("voc_decks.json", "w") as f:
+        #    json.dump(data, f, indent=4)
+#
+        #with open("voc_decks.json", "r") as f:
+        #    data = json.load(f)
+        #    decks = data["decks"]
+        #    for i in decks:
+        #        deck_name = list(i)[0]
+        #        print(i[deck_name]["vocab"])
+#
+        #    decks[0][list(decks[0])[0]] = "kek w wenn das geht ist das einfach nur genial"
+        #    print(decks[0][list(decks[0])[0]])
+#
     def create_voc(self):
         original = input("Original    > ")
         translation = input("Translation > ")
         
         answer = input("Do you want to make any changes? [y/n]\n> ")
         if answer == "y":
-            self.create_voc()
-            return
-        
+            return self.create_voc()
         return [original, translation]
     
     def edit_deck(self):
