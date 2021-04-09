@@ -72,14 +72,13 @@ class VocTraining:
         with open("voc_decks.json", "r") as f:
             data = json.load(f)
             decks = data["decks"]
-            print(decks[0]["deck 2"])
-            
-            decks_names = []
             for i in decks:
-                decks_names.append(i.keys())
+                deck_name = list(i)[0]
+                print(i[deck_name]["vocab"])
 
-            for i in decks_names:
-                print(decks[i])
+            decks[0][list(decks[0])[0]] = "kek w wenn das geht ist das einfach nur genial"
+            print(decks[0][list(decks[0])[0]])
+
 
     def edit_deck(self):
         pass
