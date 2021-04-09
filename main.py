@@ -5,34 +5,50 @@ import os
 
 class VocTraining:
     def __init__(self):
-        self.exist_voc_path = False
+        self.exist_data_path = False
+        self.data_path = os.path.join(os.getcwd(), "data")
+        self.exist_vocab_path = False
+        self.vocab_path = os.path.join(self.data_path, "vocab_decks.json")
         self.training_cmds = {"1" : self.learn_vocab, "2" : self.create_deck, "3" : self.edit_deck}
 
     def check_paths(self):
-        cwd = os.getcwd()
-        voc_decks_path = cwd + "\\voc_decks"
-
-        print("[SYSTEM] Checking base path ...")
-        if os.path.exists(voc_decks_path) == False:
-            print(f"[ERROR] Failed to initalize vocab decks path.\n'{voc_decks_path}' does not exist. Would you like to create it? [y/n]")
+        print("[SYSTEM] Checking data ...")
+        if os.path.exists(self.data_path) == False:
+            print(f"[ERROR] Failed to initalize data path.\n'{self.data_path}' does not exist. Would you like to create it? [y/n]")
             answer = input("[SYSTEM] > ")
             if answer == "y":
-                os.mkdir(voc_decks_path)
-                print(f"[SUCCESS] Successfully created vocab decks path at: '{voc_decks_path}'")
-                self.exist_voc_path = True
-                self.start_training()
+                os.mkdir(self.data_path)
+                print(f"[SUCCESS] Successfully created data path at: '{self.data_path}'")
+                self.exist_data_path = True
             else:
-                print(f"[ERROR] Creation of directory at '{voc_decks_path}' aborted. Returning to main menu.")
-                self.exist_voc_path = False
+                print(f"[ERROR] Creation of needed directory at '{self.data_path}' aborted. Returning to main menu.")
+                self.exist_data_path = False
                 menu()
                 return
+        else:
+            self.exist_data_path = True
+
+        if self.exist_data_path == True:
+            if os.path.exists(self.vocab_path) == False:
+                print(f"[ERROR] Failed to initalize vocab decks storage.\nFile 'voc_decks.json' at '{self.data_path}' does not exist. Would you like to create it? [y/n]")
+                answer = input("[SYSTEM] > ")
+                if answer == "y":
+                    with open(self.vocab_path, "w") as f:
+                        pass
+                    print(f"[SUCCESS] Successfully created vocab decks storage at: '{self.vocab_path}'")
+                    self.exist_vocab_path = True
+                else:
+                    print(f"[ERROR] Creation of needed storage capacity at '{self.vocab_path}' aborted. Returning to main menu.")
+                    menu()
+                    return
+            else:
+                self.exist_vocab_path = True
         
-        self.exist_voc_path = True
-        print("[SYSTEM] Completed.")
+        print("[SYSTEM] Data check completed.")
         self.start_training()
 
     def start_training(self):
-        if self.exist_voc_path == True:
+        if self.exist_vocab_path == True:
             print("\n# Vocab Training\n[1] Learn vocab\n[2] Create new deck\n[3] Edit a deck\n[B] Back")
             answer = input("> ")
             if answer == "b" or answer == "B":
@@ -54,7 +70,21 @@ class VocTraining:
         pass
 
     def create_deck(self):
-        deck_name = "deck 1"
+        deck_name = input("#Create new deck\nWhich name should the deck have?\n> ") # have to check if there are already decks with the same name and if so return back the error
+        
+        #with open("voc_decks.json")
+
+        voc_originals = []
+        voc_translations = []
+        while True:
+            original = input("")
+
+
+
+
+
+
+
         voc_originals = ["hello", "heißen"]
         voc_translations = ["hola", "llamarse"]
         voc_dict = dict(zip(voc_originals, voc_translations))
