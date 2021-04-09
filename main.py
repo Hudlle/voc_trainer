@@ -31,10 +31,12 @@ class VocTraining:
         if self.exist_data_path == True:
             if os.path.exists(self.vocab_path) == False:
                 print(f"[ERROR] Failed to initalize vocab decks storage.\nFile 'voc_decks.json' at '{self.data_path}' does not exist. Would you like to create it? [y/n]")
+                print(f"[WARNING] By creating a new file, all decks created or not will be overwritten. It's a new start, be aware of that.")
                 answer = input("[SYSTEM] > ")
                 if answer == "y":
                     with open(self.vocab_path, "w") as f:
-                        pass
+                        data = {"decks" : []}
+                        json.dump(data, f, indent=4)
                     print(f"[SUCCESS] Successfully created vocab decks storage at: '{self.vocab_path}'")
                     self.exist_vocab_path = True
                 else:
@@ -49,7 +51,7 @@ class VocTraining:
 
     def start_training(self):
         if self.exist_vocab_path == True:
-            print("\n# Vocab Training\n[1] Learn vocab\n[2] Create new deck\n[3] Edit a deck\n[B] Back")
+            print("\n# Vocab Training\n[1] Learn vocab\n[2] Create new deck\n[3] Edit a deck\n[B] Back\n")
             answer = input("> ")
             if answer == "b" or answer == "B":
                 menu()
@@ -80,7 +82,7 @@ class VocTraining:
         
         deck_name = input("#Create new deck\nWhich name should the deck have?\n> ") 
         for i in deck_names:
-            if deck_name == deck_names:
+            if deck_name == i:
                 print(f"[ERROR] '{deck_name}' is already in use. Try again.")
                 self.create_deck()
                 return
@@ -99,28 +101,11 @@ class VocTraining:
         
         with open(self.vocab_path, "w") as f:
             new_deck = {deck_name: {"vocab" : vocab_dict}}
-            for i in decks:
-                print(i)
             decks.append(new_deck)
-            for i in decks:
-                print(i)
             data = {"decks" : decks}
             json.dump(data, f, indent=4)
+            print(f"[SUCCESS] Successfully created '{deck_name}'")
 
-
-        #with open("voc_decks.json", "w") as f:
-        #    json.dump(data, f, indent=4)
-#
-        #with open("voc_decks.json", "r") as f:
-        #    data = json.load(f)
-        #    decks = data["decks"]
-        #    for i in decks:
-        #        deck_name = list(i)[0]
-        #        print(i[deck_name]["vocab"])
-#
-        #    decks[0][list(decks[0])[0]] = "kek w wenn das geht ist das einfach nur genial"
-        #    print(decks[0][list(decks[0])[0]])
-#
     def create_voc(self):
         original = input("Original    > ")
         translation = input("Translation > ")

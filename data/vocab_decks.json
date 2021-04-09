@@ -1,32 +1,14 @@
 {
     "decks": [
         {
-            "deck 1": {
+            "its a new start": {
                 "vocab": {
-                    "hello": "hola",
-                    "hei\u00dfen": "llamarse"
-                }
-            }
-        },
-        {
-            "deck 2": {
-                "vocab": {
-                    "hello": "hola",
-                    "hei\u00dfen": "llamarse"
-                }
-            }
-        },
-        {
-            "test": {
-                "vocab": {
-                    "n": "n"
-                }
-            }
-        },
-        {
-            "test": {
-                "vocab": {
-                    "n": "n"
+                    "hallo": "hola",
+                    "danke": "gracias",
+                    "sehr angenehm": "mucho gusto",
+                    "entschuldigung": "perdon",
+                    "sein": "soy",
+                    "Deutschland": "alemania"
                 }
             }
         }
