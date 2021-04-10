@@ -9,7 +9,7 @@ class VocTraining:
         self.data_path = os.path.join(os.getcwd(), "data")
         self.exist_vocab_path = False
         self.vocab_path = os.path.join(self.data_path, "vocab_decks.json")
-        self.training_cmds = {"1" : self.learn_vocab, "2" : self.create_deck, "3" : self.edit_deck}
+        self.training_cmds = {"1" : self.learn_vocab, "2" : self.create_deck, "3" : self.edit_deck, "4" : self.delete_deck}
 
     def check_paths(self):
         print("[SYSTEM] Checking data ...")
@@ -29,7 +29,7 @@ class VocTraining:
             self.exist_data_path = True
 
         if self.exist_data_path == True:
-            if os.path.exists(self.vocab_path) == False:
+            if os.path.exists(self.vocab_path) == False or os.path.getsize(self.vocab_path) == 0:
                 print(f"[ERROR] Failed to initalize vocab decks storage.\nFile 'voc_decks.json' at '{self.data_path}' does not exist. Would you like to create it? [y/n]")
                 print(f"[WARNING] By creating a new file, all decks created or not will be overwritten. It's a new start, be aware of that.")
                 answer = input("[SYSTEM] > ")
@@ -51,7 +51,7 @@ class VocTraining:
 
     def start_training(self):
         if self.exist_vocab_path == True:
-            print("\n# Vocab Training\n[1] Learn vocab\n[2] Create new deck\n[3] Edit a deck\n[B] Back\n")
+            print("\n# Vocab Training\n[1] Learn vocab\n[2] Create new deck\n[3] Edit a deck\n[4] Delete a deck\n[B] Back\n")
             answer = input("> ")
             if answer == "b" or answer == "B":
                 menu()
@@ -115,6 +115,30 @@ class VocTraining:
             return self.create_voc()
         return [original, translation]
     
+    def delete_deck(self):
+        with open(self.vocab_path, "r") as f:
+            data = json.load(f)
+            decks = data["decks"]
+            
+            deck_names = []
+            for i in decks:
+                print(f"#{decks.index(i) + 1} '{list(i)[0]}'")
+                deck_names.append(list(i)[0])
+
+            answer = input("Which deck would you like to delete? [<index>/b]\n> ")
+            if answer == "b" or answer == "B":
+                self.start_training()
+                return
+            elif int(answer) > len(deck_names) or int(answer) < len(deck_names):
+                print(f"[ERROR] Index number is higher than decks count. Try again.")
+                self.delete_deck()
+                return
+
+        with open(self.vocab_path, "w") as f:
+            del data["decks"][int(answer) - 1]
+            json.dump(data, f, indent=4)
+            print(f"[SUCCESS] Successfully deleted deck.")
+
     def edit_deck(self):
         pass
 

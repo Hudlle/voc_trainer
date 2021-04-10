@@ -1,14 +1,9 @@
 {
     "decks": [
         {
-            "its a new start": {
+            "test": {
                 "vocab": {
-                    "hallo": "hola",
-                    "danke": "gracias",
-                    "sehr angenehm": "mucho gusto",
-                    "entschuldigung": "perdon",
-                    "sein": "soy",
-                    "Deutschland": "alemania"
+                    "lol": "lol"
                 }
             }
         }
