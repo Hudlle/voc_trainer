@@ -133,10 +133,6 @@ class VocTraining:
                 print(f"[ERROR] Index number is higher than decks count. Try again.")
                 self.delete_deck()
                 return
-            else:
-                print(f"[ERROR] '{answer}' is not a valid input. Try again.")
-                self.delete_deck()
-                return
 
         with open(self.vocab_path, "w") as f:
             del data["decks"][int(answer) - 1]
@@ -172,7 +168,7 @@ class VocTraining:
             answer = input("What would you like to change?\n[1] Deck name\n[2] Vocab\n> ")
             if answer == "1":
                 new_name = input("New name: ")
-                decks[int(deck_index)[0]] = new_name
+                decks[0][list(decks[int(deck_index)])[0]] = new_name
                 json.dump(data, f, indent=4)
                 print(f"[SUCCESS] Successfully changed deck name to '{new_name}'")
             elif answer == "2":
