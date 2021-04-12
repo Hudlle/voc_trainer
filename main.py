@@ -168,7 +168,7 @@ class VocTraining:
             answer = input("What would you like to change?\n[1] Deck name\n[2] Vocab\n> ")
             if answer == "1":
                 new_name = input("New name: ")
-                decks[0][list(decks[int(deck_index)])[0]] = new_name
+                decks[0][list(decks[int(deck_index) - 1])] = new_name
                 json.dump(data, f, indent=4)
                 print(f"[SUCCESS] Successfully changed deck name to '{new_name}'")
             elif answer == "2":
