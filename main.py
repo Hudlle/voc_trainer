@@ -86,7 +86,7 @@ class VocTraining:
                 print(f"[ERROR] '{deck_name}' is already in use. Try again.")
                 self.create_deck()
                 return
-        print(f"Deck name will be: {deck_name}\n")
+        print(f"Deck name will be: {deck_name}. Don't worry if you've typed something wrong, you can change it later.\n")
 
         print("Now add vocab.")
         vocab_originals, vocab_translations, vocab_dict = [], [], []
@@ -133,6 +133,10 @@ class VocTraining:
                 print(f"[ERROR] Index number is higher than decks count. Try again.")
                 self.delete_deck()
                 return
+            else:
+                print(f"[ERROR] '{answer}' is not a valid input. Try again.")
+                self.delete_deck()
+                return
 
         with open(self.vocab_path, "w") as f:
             del data["decks"][int(answer) - 1]
@@ -140,8 +144,44 @@ class VocTraining:
             print(f"[SUCCESS] Successfully deleted deck.")
 
     def edit_deck(self):
-        pass
+        with open(self.vocab_path, "r") as f:
+            data = json.load(f)
+            decks = data["decks"]
 
+            deck_names = []
+            for i in decks:
+                print(f"#{decks.index(i) + 1} '{list(i)[0]}'")
+                deck_names.append(list(i)[0])
+
+            deck_index = input("Which deck would you like to edit? [<index>/b]\n> ")
+            if deck_index == "b" or deck_index == "B":
+                self.start_training()
+                return
+            #try:
+            #    deck_index = int(deck_index)
+            #except:
+            #    print(f"[ERROR] '{deck_index}' is not a valid input. Try again.")
+            #    self.delete_deck()
+            #    return
+            if int(deck_index) > len(deck_names) or int(deck_index) < len(deck_names):
+                print(f"[ERROR] Index number is higher than decks count. Try again.")
+                self.edit_deck()
+                return
+
+        with open(self.vocab_path, "w") as f:
+            answer = input("What would you like to change?\n[1] Deck name\n[2] Vocab\n> ")
+            if answer == "1":
+                new_name = input("New name: ")
+                decks[int(deck_index)[0]] = new_name
+                json.dump(data, f, indent=4)
+                print(f"[SUCCESS] Successfully changed deck name to '{new_name}'")
+            elif answer == "2":
+                pass
+            else:
+                print(f"[ERROR] '{answer}' is not a valid input. Try again.")
+                self.edit_deck()
+                return
+            
 def menu():
     print("\n--> Main Menu\n[1] Vocab training\n[2] Tens training\n[Q] Quit\n")
     answer = input("> ")
