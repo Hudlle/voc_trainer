@@ -153,12 +153,6 @@ class VocTraining:
             if deck_index == "b" or deck_index == "B":
                 self.start_training()
                 return
-            #try:
-            #    deck_index = int(deck_index)
-            #except:
-            #    print(f"[ERROR] '{deck_index}' is not a valid input. Try again.")
-            #    self.delete_deck()
-            #    return
             if int(deck_index) > len(deck_names) or int(deck_index) < len(deck_names):
                 print(f"[ERROR] Index number is higher than decks count. Try again.")
                 self.edit_deck()
@@ -167,8 +161,13 @@ class VocTraining:
         with open(self.vocab_path, "w") as f:
             answer = input("What would you like to change?\n[1] Deck name\n[2] Vocab\n> ")
             if answer == "1":
-                new_name = input("New name: ")
-                decks[0][list(decks[int(deck_index) - 1])] = new_name
+                new_name = input("New name > ")
+                old_name = list(decks[decks.index(int(deck_index) - 1)])
+                vocab_dict = decks[decks.index(int(deck_index) - 1)][0]
+                print(f"vocab {vocab_dict}")
+                new_deck = {new_name: {"vocab" : vocab_dict}}
+                decks.pop(int(deck_index) - 1)
+                decks.insert(int(deck_index) - 1, new_deck)
                 json.dump(data, f, indent=4)
                 print(f"[SUCCESS] Successfully changed deck name to '{new_name}'")
             elif answer == "2":
