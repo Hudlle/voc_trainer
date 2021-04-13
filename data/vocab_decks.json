@@ -1,0 +1,14 @@
+{
+    "decks": [
+        {
+            "test": {
+                "vocab": "n"
+            }
+        },
+        {
+            "spanisch / espanol": {
+                "vocab": "s"
+            }
+        }
+    ]
+}
