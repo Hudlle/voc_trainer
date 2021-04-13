@@ -166,9 +166,9 @@ class VocTraining:
                 for i in decks:
                     if int(deck_index) - 1 == decks.index(i):
                         old_name = list(i)[0]
-                        vocab_dict = list(i)[0][0]
+                        vocab_dict = i[0][0]
                         print(f"{old_name}, {i}")
-                print(f"vocab {vocab_dict}")
+                print(f">>> {vocab_dict}")
                 new_deck = {new_name: {"vocab" : vocab_dict}}
                 decks.pop(int(deck_index) - 1)
                 decks.insert(int(deck_index) - 1, new_deck)
