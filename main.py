@@ -162,13 +162,12 @@ class VocTraining:
             answer = input("What would you like to change?\n[1] Deck name\n[2] Vocab\n> ")
             if answer == "1":
                 new_name = input("New name > ")
-                old_name = ""
                 for i in decks:
                     if int(deck_index) - 1 == decks.index(i):
-                        old_name = list(i)[0]
-                        vocab_values = i.values()
+                        change_deck = i
                 
-                vocab_dict = pass # has to be redefined with origins and translations of the home dir
+                
+                vocab_dict = {} # has to be redefined with origins and translations of the home dir
                 new_deck = {new_name: {"vocab" : vocab_dict}}
                 decks.pop(int(deck_index) - 1)
                 decks.insert(int(deck_index) - 1, new_deck)
