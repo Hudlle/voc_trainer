@@ -14,14 +14,8 @@ class TestObject():
             for deck in decks:
                 print(f"[DEBUG] Deck : {deck}")
                 
-                #trying = deck.values()
-                #print(f"[TRY] {trying}")
-
-                for i in deck.values():
-                    for j in i.values():
-                        vocab_originals = list(j)
-                        for k in j:
-                            print(k)
+                trying = list(deck.values())
+                print(f"[TRY] {trying}")
 
 if __name__ == "__main__":
     obj = TestObject()
