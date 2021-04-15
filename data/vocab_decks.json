@@ -1,0 +1,19 @@
+{
+    "decks": [
+        {
+            "jkdal": {
+                "vocab": {
+                    "hallo": "hola"
+                }
+            }
+        },
+        {
+            "test": {
+                "vocab": {
+                    "hallo": "hola",
+                    "danke": "gracias"
+                }
+            }
+        }
+    ]
+}

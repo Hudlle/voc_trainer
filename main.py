@@ -165,6 +165,7 @@ class VocTraining:
                 for i in decks:
                     if int(deck_index) - 1 == decks.index(i):
                         change_deck = i
+                        
                 
                 vocab_dict = {} # has to be redefined with origins and translations of the home dir
                 new_deck = {new_name: {"vocab" : vocab_dict}}
