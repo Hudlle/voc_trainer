@@ -16,11 +16,14 @@ class TestObject():
                 
                 trying = list(deck.values())
                 print(f"[TRY] {trying}")
-
+                
+                vocab_originals, vocab_translations = [], []
                 for i in trying[0].values():
-                    print(i)
-                    for j in i:
-                        print(j)
+                    for j in i.items():
+                        vocab_originals.append(j[0])
+                        vocab_translations.append(j[1])
+
+                print(vocab_originals, vocab_translations, sep="\n")
 
 if __name__ == "__main__":
     obj = TestObject()
