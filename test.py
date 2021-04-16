@@ -14,9 +14,6 @@ class TestObject():
             for deck in decks:
                 print(f"[DEBUG] Deck : {deck}")
                 
-                trying = list(deck.values())
-                print(f"[TRY] {trying}")
-                
                 vocab_originals, vocab_translations = [], []
                 for i in list(deck.values())[0].values():
                     for j in i.items():

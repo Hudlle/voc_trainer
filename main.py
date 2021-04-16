@@ -176,8 +176,16 @@ class VocTraining:
                         decks.insert(int(deck_index) - 1, new_deck)
                         json.dump(data, f, indent=4)
                         print(f"[SUCCESS] Successfully changed deck name to '{new_name}'")
+            
             elif answer == "2":
-                pass
+                # get the vocab in list format
+                # print it out enumerated
+                # index single vocab input
+                # print out single vocab
+                # ask what should be changed [original or translation]
+                # get new entry
+                # insert it into vocab and data
+                # write it to file
             else:
                 print(f"[ERROR] '{answer}' is not a valid input. Try again.")
                 self.edit_deck()
