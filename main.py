@@ -89,18 +89,18 @@ class VocTraining:
         print(f"Deck name will be: {deck_name}. Don't worry if you've typed something wrong, you can change it later.\n")
 
         print("Now add vocab.")
-        vocab_originals, vocab_translations, vocab_dict = [], [], []
+        vocab_originals, vocab_translations, vocab_list = [], [], []
         while True:
             print(f"Card #{len(vocab_originals) + 1}")
             output = self.create_voc()
             vocab_originals.append(output[0]), vocab_translations.append(output[1])
             answer = input("Do you want to create another card? [y/n]\n> ")
             if answer == "n":
-                vocab_dict = dict(zip(vocab_originals, vocab_translations))
+                vocab_list = dict(zip(vocab_originals, vocab_translations))
                 break
         
         with open(self.vocab_path, "w") as f:
-            new_deck = {deck_name: {"vocab" : vocab_dict}}
+            new_deck = {deck_name: {"vocab" : vocab_list}}
             decks.append(new_deck)
             data = {"decks" : decks}
             json.dump(data, f, indent=4)
@@ -163,16 +163,19 @@ class VocTraining:
             if answer == "1":
                 new_name = input("New name > ")
                 for i in decks:
-                    if int(deck_index) - 1 == decks.index(i):
-                        change_deck = i
+                    if int(deck_index) - 1 == decks.index(i):            
+                        vocab_originals, vocab_translations, vocab_list = [], [], []
+                        for j in list(i.values())[0].values():
+                            for k in j.items():
+                                vocab_originals.append(k[0])
+                                vocab_translations.append(k[1])
                         
-                
-                vocab_dict = {} # has to be redefined with origins and translations of the home dir
-                new_deck = {new_name: {"vocab" : vocab_dict}}
-                decks.pop(int(deck_index) - 1)
-                decks.insert(int(deck_index) - 1, new_deck)
-                json.dump(data, f, indent=4)
-                print(f"[SUCCESS] Successfully changed deck name to '{new_name}'")
+                        vocab_list = dict(zip(vocab_originals, vocab_translations))
+                        new_deck = {new_name: {"vocab" : vocab_list}}
+                        decks.pop(int(deck_index) - 1)
+                        decks.insert(int(deck_index) - 1, new_deck)
+                        json.dump(data, f, indent=4)
+                        print(f"[SUCCESS] Successfully changed deck name to '{new_name}'")
             elif answer == "2":
                 pass
             else:

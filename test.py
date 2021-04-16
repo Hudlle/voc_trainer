@@ -18,7 +18,7 @@ class TestObject():
                 print(f"[TRY] {trying}")
                 
                 vocab_originals, vocab_translations = [], []
-                for i in trying[0].values():
+                for i in list(deck.values())[0].values():
                     for j in i.items():
                         vocab_originals.append(j[0])
                         vocab_translations.append(j[1])

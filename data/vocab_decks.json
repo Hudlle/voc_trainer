@@ -1,14 +1,7 @@
 {
     "decks": [
         {
-            "jkdal": {
-                "vocab": {
-                    "hallo": "hola"
-                }
-            }
-        },
-        {
-            "test": {
+            "spanisch": {
                 "vocab": {
                     "hallo": "hola",
                     "danke": "gracias"
