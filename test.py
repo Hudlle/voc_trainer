@@ -17,7 +17,10 @@ class TestObject():
                 trying = list(deck.values())
                 print(f"[TRY] {trying}")
 
-                #need some nested for loops so i can assign vocab_originals and vocab_translations again
+                for i in trying[0].values():
+                    print(i)
+                    for j in i:
+                        print(j)
 
 if __name__ == "__main__":
     obj = TestObject()
