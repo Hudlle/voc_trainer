@@ -179,13 +179,30 @@ class VocTraining:
             
             elif answer == "2":
                 # get the vocab in list format
-                # print it out enumerated
-                # index single vocab input
-                # print out single vocab
-                # ask what should be changed [original or translation]
-                # get new entry
-                # insert it into vocab and data
-                # write it to file
+                for i in decks:
+                    if int(deck_index) - 1 == decks.index(i):            
+                        vocab_originals, vocab_translations, vocab_list = [], [], []
+                        for j in list(i.values())[0].values():
+                            for k in j.items():
+                                vocab_originals.append(k[0])
+                                vocab_translations.append(k[1])
+                        vocab_list = list(zip(vocab_originals, vocab_translations))
+                
+                        # print it out enumerated
+                        for i in vocab_list:
+                            print(f"#{vocab_list.index(i) + 1} {i[0]} | {i[1]}")
+                        
+                        # index single vocab input
+                        voc_index = input("Which vocabulary would you like to edit? [<index>/b]\n> ")
+                        if voc_index == "b" or voc_index == "B":
+                            self.edit_deck()
+                            return
+
+                        # print out single vocab
+                        # ask what should be changed [original or translation]
+                        # get new entry
+                        # insert it into vocab and data
+                        # write it to file
             else:
                 print(f"[ERROR] '{answer}' is not a valid input. Try again.")
                 self.edit_deck()
