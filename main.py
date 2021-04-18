@@ -191,43 +191,52 @@ class VocTraining:
                                 vocab_translations.append(k[1])
                         vocab_list = list(zip(vocab_originals, vocab_translations))
                 
-                        # print it out enumerated
-                        for i in vocab_list:
-                            print(f"#{vocab_list.index(i) + 1} {i[0]} | {i[1]}")
-                        
-                        # index single vocab input
-                        voc_index = input("Which vocabulary would you like to edit? [<index>/b]\n> ")
-                        if voc_index == "b" or voc_index == "B":
+                        answer = input(f"What would you like to do?\n[1] Create a new vocabulary\n[2] Edit an existing vocabulary\n[3] Delete a vocabulary\n[B] Back\n> ")
+                        if answer == "b" or answer == "B":
                             self.edit_deck()
                             return
 
-                        # print out single vocab and ask what should be changed [original or translation]
-                        print(f"[1] Original : {vocab_list[int(voc_index) - 1][0]}\n[2] Translation : {vocab_list[int(voc_index) - 1][0]}")
-                        answer = input("What would you like to change? [index]\n> ")
-                        
-                        # get new entry
                         if answer == "1":
-                            new_original = input("New original > ")
-                            vocab_originals.pop(int(voc_index) - 1)
-                            vocab_originals.insert(int(voc_index) - 1, new_original)
+                            pass
                         elif answer == "2":
-                            new_translation = input("New translation > ")
-                            vocab_translations.pop(int(voc_index) - 1)
-                            vocab_translations.insert(int(voc_index) - 1, new_translation)
-                        else:
-                            print(f"[ERROR] '{answer}' is not a valid input. Try again.")
-                            self.edit_deck()
-                            return
+                            # print it out enumerated
+                            for i in vocab_list:
+                                print(f"#{vocab_list.index(i) + 1} {i[0]} | {i[1]}")
+
+                            # index single vocab input
+                            voc_index = input("Which vocabulary would you like to edit? [index]\n> ")
+
+                            # print out single vocab and ask what should be changed [original or translation]
+                            print(f"[1] Original : {vocab_list[int(voc_index) - 1][0]}\n[2] Translation : {vocab_list[int(voc_index) - 1][1]}")
+                            answer = input("What would you like to change? [index]\n> ")
+
+                            # get new entry
+                            if answer == "1":
+                                new_original = input("New original > ")
+                                vocab_originals.pop(int(voc_index) - 1)
+                                vocab_originals.insert(int(voc_index) - 1, new_original)
+                            elif answer == "2":
+                                new_translation = input("New translation > ")
+                                vocab_translations.pop(int(voc_index) - 1)
+                                vocab_translations.insert(int(voc_index) - 1, new_translation)
+                            else:
+                                print(f"[ERROR] '{answer}' is not a valid input. Try again.")
+                                self.edit_deck()
+                                return
+
+                            # insert it into vocab and data
+                            vocab_dict = dict(zip(vocab_originals, vocab_translations))
+                            new_deck = {deck_names[int(deck_index) - 1] : {"vocab" : vocab_dict}} 
+                            decks.pop(int(deck_index) - 1)
+                            decks.insert(int(deck_index) - 1, new_deck)
+
+                            # write it to file and print out success message
+                            json.dump(data, f, indent=4)
+                            print(f"[SUCCESS] Successfully changed vocabulary.")
                         
-                        # insert it into vocab and data
-                        vocab_dict = dict(zip(vocab_originals, vocab_translations))
-                        new_deck = {deck_names[int(deck_index) - 1] : {"vocab" : vocab_dict}} 
-                        decks.pop(int(deck_index) - 1)
-                        decks.insert(int(deck_index) - 1, new_deck)
+                        elif answer == "3":
+                            pass 
                         
-                        # write it to file and print out success message
-                        json.dump(data, f, indent=4)
-                        print(f"[SUCCESS] Successfully changed vocabulary.")
             else:
                 print(f"[ERROR] '{answer}' is not a valid input. Try again.")
                 self.edit_deck()
