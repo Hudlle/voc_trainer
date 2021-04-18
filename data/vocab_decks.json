@@ -1,9 +1,11 @@
 {
     "decks": [
         {
-            "n": {
+            "test": {
                 "vocab": {
-                    "hallo": "n"
+                    "hallo": "hola",
+                    "danke": "gracias",
+                    "angenehm!": "mucho gusto"
                 }
             }
         }

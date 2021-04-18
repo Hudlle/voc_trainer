@@ -83,15 +83,9 @@ class VocTraining:
                 self.start_training()
                 return
             
-            vocab_list = []
-            for i in decks:
-                    if int(deck_index) - 1 == decks.index(i):            
-                        vocab_originals, vocab_translations, vocab_list = [], [], []
-                        for j in list(i.values())[0].values():
-                            for k in j.items():
-                                vocab_originals.append(k[0])
-                                vocab_translations.append(k[1])
-                        vocab_list = list(zip(vocab_originals, vocab_translations))
+            vocab_originals, vocab_translations, vocab_list = self.get_vocab(data, int(answer) - 1)
+
+        #training
 
     def create_deck(self):
         with open(self.vocab_path, "r") as f:
@@ -128,8 +122,6 @@ class VocTraining:
             json.dump(data, f, indent=4)
             print(f"[SUCCESS] Successfully created '{deck_name}'")
 
-    
-
     def edit_deck(self):
         with open(self.vocab_path, "r") as f:
             data = json.load(f)
@@ -149,7 +141,7 @@ class VocTraining:
                 self.edit_deck()
                 return
 
-            vocab_originals, vocab_translations, vocab_list = self.get_vocab(int(deck_index) - 1)
+            vocab_originals, vocab_translations, vocab_list = self.get_vocab(data, int(deck_index) - 1)
         
         with open(self.vocab_path, "w") as f:
             answer = input("What would you like to change?\n[1] Deck name\n[2] Vocab\n[B] Back\n> ")
@@ -276,21 +268,19 @@ class VocTraining:
             return self.create_voc()
         return [original, translation]
     
-    def get_vocab(self, deck_index):
-        with open(self.vocab_path, "r") as f:
-            data = json.load(f)
-            decks = data["decks"]
-            
-            for i in decks:
-                if int(deck_index) == decks.index(i):            
-                    vocab_originals, vocab_translations, vocab_list = [], [], []
-                    for j in list(i.values())[0].values():
-                        for k in j.items():
-                            vocab_originals.append(k[0])
-                            vocab_translations.append(k[1])
-                    vocab_list = list(zip(vocab_originals, vocab_translations))
-            
-            return [vocab_originals, vocab_translations, vocab_list]
+    def get_vocab(self, data, deck_index):
+        decks = data["decks"]
+        
+        for i in decks:
+            if int(deck_index) == decks.index(i):            
+                vocab_originals, vocab_translations, vocab_list = [], [], []
+                for j in list(i.values())[0].values():
+                    for k in j.items():
+                        vocab_originals.append(k[0])
+                        vocab_translations.append(k[1])
+                vocab_list = list(zip(vocab_originals, vocab_translations))
+        
+        return [vocab_originals, vocab_translations, vocab_list]
             
 def menu():
     print("\n--> Main Menu\n[1] Vocab training\n[2] Tens training\n[Q] Quit\n")
