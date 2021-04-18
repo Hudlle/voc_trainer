@@ -202,18 +202,18 @@ class VocTraining:
                             return
 
                         # print out single vocab and ask what should be changed [original or translation]
-                        print(f"[1] Original : {vocab_list[voc_index - 1][0]}\n[2] Translation : {vocab_list[voc_index - 1][0]}")
+                        print(f"[1] Original : {vocab_list[int(voc_index) - 1][0]}\n[2] Translation : {vocab_list[int(voc_index) - 1][0]}")
                         answer = input("What would you like to change? [index]\n> ")
                         
                         # get new entry
                         if answer == "1":
                             new_original = input("New original > ")
-                            vocab_originals.pop(voc_index - 1)
-                            vocab_originals.insert(voc_index - 1, new_original)
+                            vocab_originals.pop(int(voc_index) - 1)
+                            vocab_originals.insert(int(voc_index) - 1, new_original)
                         elif answer == "2":
                             new_translation = input("New translation > ")
-                            vocab_translations.pop(voc_idnex - 1)
-                            vocab_translations.insert(voc_index - 1)
+                            vocab_translations.pop(int(voc_index) - 1)
+                            vocab_translations.insert(int(voc_index) - 1, new_translation)
                         else:
                             print(f"[ERROR] '{answer}' is not a valid input. Try again.")
                             self.edit_deck()
