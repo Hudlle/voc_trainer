@@ -3,8 +3,7 @@
         {
             "n": {
                 "vocab": {
-                    "Hallo": "Hola",
-                    "danke": "gracias"
+                    "hallo": "hola"
                 }
             }
         }

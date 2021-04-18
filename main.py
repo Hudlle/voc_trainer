@@ -211,7 +211,7 @@ class VocTraining:
                             decks.insert(int(deck_index) - 1, new_deck)
 
                             json.dump(data, f, indent=4)
-                            print(f"[SUCCESS] Successfully changed vocabulary.")
+                            print(f"[SUCCESS] Successfully created new vocabulary.")
 
                         elif answer == "2":
                             # print it out enumerated
@@ -250,8 +250,19 @@ class VocTraining:
                             print(f"[SUCCESS] Successfully changed vocabulary.")
                         
                         elif answer == "3":
-                            pass 
-                        
+                            for i in vocab_list:
+                                print(f"#{vocab_list.index(i) + 1} {i[0]} | {i[1]}")
+                            voc_index = input("Which vocabulary would you like to delete? [index]\n> ")
+                            vocab_originals.pop(int(voc_index) - 1)
+                            vocab_translations.pop(int(voc_index) - 1)
+                            
+                            vocab_dict = dict(zip(vocab_originals, vocab_translations))
+                            new_deck = {deck_names[int(deck_index) - 1] : {"vocab" : vocab_dict}}
+                            decks.pop(int(deck_index) - 1)
+                            decks.insert(int(deck_index) - 1, new_deck)
+                            
+                            json.dump(data, f, indent=4)
+                            print(f"[SUCCESS] Successfully deleted vocabulary.")
             else:
                 print(f"[ERROR] '{answer}' is not a valid input. Try again.")
                 self.edit_deck()
