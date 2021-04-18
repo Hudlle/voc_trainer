@@ -197,7 +197,22 @@ class VocTraining:
                             return
 
                         if answer == "1":
-                            pass
+                            while True:
+                                print(f"Card #{len(vocab_originals)} in deck '{list(i)[0]}'")
+                                output = self.create_voc()
+                                vocab_originals.append(output[0]), vocab_translations.append(output[1])
+                                answer = input("Do you want to create another card? [y/n]\n> ")
+                                if answer == "n":
+                                    vocab_dict = dict(zip(vocab_originals, vocab_translations))
+                                    break
+                            
+                            new_deck = {deck_names[int(deck_index) - 1] : {"vocab" : vocab_dict}} 
+                            decks.pop(int(deck_index) - 1)
+                            decks.insert(int(deck_index) - 1, new_deck)
+
+                            json.dump(data, f, indent=4)
+                            print(f"[SUCCESS] Successfully changed vocabulary.")
+
                         elif answer == "2":
                             # print it out enumerated
                             for i in vocab_list:
