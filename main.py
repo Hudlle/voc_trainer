@@ -91,6 +91,14 @@ class VocTraining:
             if answer == "b" or answer == "B":
                 break
             
+            error_list = []
+            for j in list(answer):
+                if j != i[1][list(answer).index(j)]:
+                    error_list.append("X")
+                else:
+                    error_list.append(" ")
+            
+            print(f"\nCorrect answer : {i[1]}\nError chart :    {''.join(error_list)}\nYour input :     {answer}")
             
 
     def create_deck(self):
