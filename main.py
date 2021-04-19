@@ -85,7 +85,13 @@ class VocTraining:
             
             vocab_originals, vocab_translations, vocab_list = self.get_vocab(data, int(answer) - 1)
 
-        #training
+        random_indexes = random.sample(range(0, len(vocab_originals)), len(vocab_originals))
+        for i in vocab_list:
+            answer = input(f"Card #{vocab_list.index(i) + 1}\nOriginal : {i[0]}\nTranslation > ")
+            if answer == "b" or answer == "B":
+                break
+            
+            
 
     def create_deck(self):
         with open(self.vocab_path, "r") as f:
