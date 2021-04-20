@@ -99,6 +99,8 @@ class VocTraining:
                     error_list.append(" ")
             
             print(f"\nCorrect answer : {i[1]}\nError chart :    {''.join(error_list)}\nYour input :     {answer}")
+
+            #commit damit ich meine streak halte
             
 
     def create_deck(self):
